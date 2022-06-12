@@ -1,0 +1,19 @@
+sh_binary(
+    name = "foo1",
+    srcs = ["foo.sh"],
+)
+
+alias(
+    name = "foo2",
+    actual = "foo1",
+)
+
+sh_binary(
+    name = "bar",
+    srcs = ["bar.sh"],
+    data = [
+        ":foo1",
+        ":foo2",
+        "@bazel_tools//tools/bash/runfiles",
+    ],
+)
